@@ -1,0 +1,13 @@
+
+.row {
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.linkFooter a:hover {
+    font-weight: bold;
+}
+
+.socialIcon:hover {
+    color: white;
+}

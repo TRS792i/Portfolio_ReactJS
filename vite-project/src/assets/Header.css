@@ -1,0 +1,11 @@
+
+
+
+.navlink:focus {
+    
+    border-bottom: 2px solid white;
+    font-weight: bold;
+}
+ .navlink:hover {
+    font-weight: bold;
+ }
