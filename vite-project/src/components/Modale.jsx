@@ -1,66 +1,84 @@
-import { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Image from 'react-bootstrap/Image';
-import imgModale from '../images/modal/19842736.png';
+import { useEffect, useState } from 'react';
+import { Modal, Button, Spinner, Alert } from 'react-bootstrap';
 
-function Modale() {
-  const [show, setShow] = useState(false);
+function GitHubProfileModal() {
+  const [user, setUser] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await fetch('https://api.github.com/users/github-john-doe');
+        if (!response.ok) throw new Error(`Erreur : ${response.status}`);
+        const data = await response.json();
+        setUser(data);
+        setShowModal(false);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const [user,setUser] = useState([]);
-
-  const getUser = async () => {
-    const res = await fetch("https://api.github.com/users/github-john-doe");
-    const json = await res.json();
-    setUser(json);
-  }
-
-  useEffect( () => {
-    getUser();
-  },[])
-
+    fetchUser();
+  }, []);
 
   return (
-    <>
-      <Button variant="danger" onClick={handleShow}>
-        En savoir plus
-      </Button>
+    <div className="container mt-4 text-center">
+      {user && !loading && (
+        <Button variant="danger" onClick={() => setShowModal(true)}>
+          En savoir plus
+        </Button>
+      )}
 
-      <Modal size='lg' show={show} onHide={handleClose} animation={false}>
-        <Modal.Header className='bg-dark text-light' closeButton variant="light">
-          <Modal.Title>Mon profil Github</Modal.Title>
+      <Modal className='border border-secondary' size='lg' show={showModal} onHide={() => setShowModal(false)} centered>
+        <Modal.Header className='bg-dark text-light' closeButton>
+          <Modal.Title>Mon profil GitHub</Modal.Title>
         </Modal.Header>
         <Modal.Body className='bg-dark text-light'>
-          <div className="row justify-content-evenly my-3">
-            <div className="col-md-6 my-2 mx-0">
-              <Image src={imgModale} alt="avatar" fluid/>
+          {loading && <Spinner animation="border" />}
+          {error && <Alert variant="danger">{error}</Alert>}
+          {user && (
+            <div className="row justify-content-evenly my-3">
+              <div className='col-md-6 my-2'>
+                <img
+                src={user.avatar_url}
+                alt="Avatar"
+                className="img-fluid rounded-circle mb-3"
+                />
+              </div>
+              <div className='col-md-6 my-2'>
+                <p><i class="fa-solid fa-user text-light pe-2"></i>{user.name || user.login}</p>
+                <hr />
+                <i class="fa-solid fa-location-dot text-light pe-2"></i>
+                <hr />
+                <p><i class="fa-solid fa-comment text-light pe-2"></i>{user.bio}</p>
+                <hr />
+                <p><i class="fa-solid fa-box-archive pe-2"></i><strong>Repository :</strong> {user.public_repos}</p>
+                <hr />
+                <p><i class="fa-solid fa-user-group text-light pe-2"></i><strong>Followers :</strong> {user.followers}</p>
+                <hr />
+                <p><i class="fa-solid fa-user-group text-light pe-2"></i><strong>Following :</strong> {user.following}</p>
+                <hr />
+                <a href={user.html_url} target="_blank" rel="noopener noreferrer">
+                  Voir le profil
+                </a>
+              </div>
+              
             </div>
-            <div className="col-md-6 my-2 mx-0">
-              <p><i class="fa-solid fa-user text-light pe-2"></i><a target="_blank" href="https://github.com/github-john-doe"> John Doe</a></p>
-              <hr />
-              <i class="fa-solid fa-location-dot text-light pe-2"></i>
-              <hr />
-              <p><i class="fa-solid fa-comment text-light pe-2"></i> As we all know, John Doe's indentity is unknow. I just wanted to contribute without being unknown</p> 
-              <hr />
-              <p><i class="fa-solid fa-box-archive pe-2"></i> Repositories : 1</p> 
-              <hr />
-              <p><i class="fa-solid fa-user-group text-light pe-2"></i> Followers : 16</p> 
-              <hr />
-              <p><i class="fa-solid fa-user-group text-light pe-2"></i> Following : 0</p>
-            </div>
-          </div>       
+          )}
         </Modal.Body>
         <Modal.Footer className='bg-dark text-light'>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
             Fermer
           </Button>
         </Modal.Footer>
       </Modal>
-    </>
+    </div>
   );
 }
 
-export default Modale;
+export default GitHubProfileModal;
