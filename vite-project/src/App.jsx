@@ -1,12 +1,13 @@
 
 import './App.css'
 import './assets/header.css'
-import Header from "./components/Header.jsx";
+import Header from "./components/header.jsx";
 import Footer from "./components/Footer.jsx";
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Image from 'react-bootstrap/Image';
 import imgJohnDoe from './images/john-doe-about.jpg'
-import Modale from "./components/Modale.jsx";
+import GitHubProfileModal from './components/Modale.jsx'
+
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
           <div className="slider">
               <h1 className="text-light text-center">Bonjour, je suis John Doe</h1>
               <h2 className="text-light text-center mb-4">Développeur web full stack</h2>
-              <Modale />
+              <GitHubProfileModal />
           </div>
           <div className="container col-md-8 shadow my-4 ">
               <div className="row justify-content-center mx-1">
