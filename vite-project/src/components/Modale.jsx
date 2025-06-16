@@ -51,17 +51,17 @@ function GitHubProfileModal() {
                 />
               </div>
               <div className='col-md-6 my-2'>
-                <p><i class="fa-solid fa-user text-light pe-2"></i>{user.name || user.login}</p>
+                <p><i className="fa-solid fa-user text-light pe-2"></i><strong>{user.name || user.login}</strong></p>
                 <hr />
-                <i class="fa-solid fa-location-dot text-light pe-2"></i>
+                <i className="fa-solid fa-location-dot text-light pe-2"></i>
                 <hr />
-                <p><i class="fa-solid fa-comment text-light pe-2"></i>{user.bio}</p>
+                <p><i className="fa-solid fa-comment text-light pe-2"></i>{user.bio}</p>
                 <hr />
-                <p><i class="fa-solid fa-box-archive pe-2"></i><strong>Repository :</strong> {user.public_repos}</p>
+                <p><i className="fa-solid fa-box-archive pe-2"></i><strong>Repository :</strong> {user.public_repos}</p>
                 <hr />
-                <p><i class="fa-solid fa-user-group text-light pe-2"></i><strong>Followers :</strong> {user.followers}</p>
+                <p><i className="fa-solid fa-user-group text-light pe-2"></i><strong>Followers :</strong> {user.followers}</p>
                 <hr />
-                <p><i class="fa-solid fa-user-group text-light pe-2"></i><strong>Following :</strong> {user.following}</p>
+                <p><i className="fa-solid fa-user-group text-light pe-2"></i><strong>Following :</strong> {user.following}</p>
                 <hr />
                 <a href={user.html_url} target="_blank" rel="noopener noreferrer">
                   Voir le profil

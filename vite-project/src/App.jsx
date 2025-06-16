@@ -1,7 +1,7 @@
 
 import './App.css'
 import './assets/header.css'
-import Header from "./components/header.jsx";
+import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Image from 'react-bootstrap/Image';
