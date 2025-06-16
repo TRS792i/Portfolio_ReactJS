@@ -11,10 +11,11 @@
     opacity: 80%;
  }
 
-.h1 {
+.slider h1 {
     font-size: 3.5rem;
 }
 
-.h2 {
-    font-size: 2.5em;
+.slider h2 {
+    font-size: 2.5rem;
 }
+

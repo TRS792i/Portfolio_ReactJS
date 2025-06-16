@@ -1,11 +1,10 @@
 
 
-
-.navlink:focus {
-    
+.nav-link.active {
     border-bottom: 2px solid white;
     font-weight: bold;
 }
- .navlink:hover {
+.nav-link:hover {
     font-weight: bold;
+    transition-duration: 1s;
  }
